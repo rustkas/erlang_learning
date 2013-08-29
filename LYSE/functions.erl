@@ -48,4 +48,4 @@ right_age(_) ->
 wrong_age(X) when X < 16; X > 104 ->
   true;
 wrong_age(_) ->
-  fasle.
+  false.
