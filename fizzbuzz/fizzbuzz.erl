@@ -35,8 +35,6 @@ run(N, Res) when N rem 5 =:= 0 ->
 run(N, Res) -> 
 	run(N + 1, Res ++ [integer_to_list(N)]).
 
-%fizz_test() -> [1,2,"Fizz"] = run(3, []).
-
 % c(fizzbuzz).
 % c(fizzbuzz). fizzbuzz:test().
 %
