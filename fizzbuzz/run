@@ -1,0 +1,8 @@
+#!/usr/bin/env escript
+% escript run
+%-import(fizzbuzz, [run/0]).
+
+
+main(_Args) ->
+	fizzbuzz:run().
+    

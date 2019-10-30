@@ -1,15 +1,44 @@
 -module(fizzbuzz).
 -export([run/0]).
--include_lib("eunit/include/eunit.hrl").
+-export([test/0]).
 
-run() -> run(1).
+-spec test1() -> 'test_worked'.
 
-run(N) -> lists:foreach(fun(5) -> io:format("~s~n", [S]) end, run(N, [])).
+test1()->
+	Result = run(),
+	io:format("~p~n",[Result]),
+	test_worked.
+
+-spec test() -> 'test_worked'.
+
+test() ->
+	test1(),
+	
+	test_worked.
+
+-spec run() -> 'ok'.
+
+run() -> 
+	lists:foreach(fun(S) -> io:format("~s ", [S]) end, 
+					run(1, [])),
+	io:nl().
+
+-spec run(SerialNumber :: pos_integer(),TempString :: [string()]) -> Result :: [string()].
 
 run(N, Res) when N > 100 -> Res;
-run(N, Res) when (N rem 3 =:= 0) and (N rem 5 =:= 0) -> run(N + 1, Res ++ ["Fizzbuzz"]);
-run(N, Res) when N rem 3 =:= 0 -> run(N + 1, Res ++ ["Fizz"]);
-run(N, Res) when N rem 5 =:= 0 -> run(N + 1, Res ++ ["Buzz"]);
-run(N, Res) -> run(N + 1, Res ++ [integer_to_list(N)]).
+run(N, Res) when (N rem 3 =:= 0) and (N rem 5 =:= 0) -> 
+	run(N + 1, Res ++ ["Fizzbuzz"] ++ ["("] ++ [integer_to_list(N)] ++ [")"] ++ ["\n"] );
+run(N, Res) when N rem 3 =:= 0 -> 
+	run(N + 1, Res ++ ["Fizz"]);
+run(N, Res) when N rem 5 =:= 0 -> 
+	run(N + 1, Res ++ ["Buzz"]);
+run(N, Res) -> 
+	run(N + 1, Res ++ [integer_to_list(N)]).
 
-fizz_test() -> [1,2,"Fizz"] = run(3, []).
+%fizz_test() -> [1,2,"Fizz"] = run(3, []).
+
+% c(fizzbuzz).
+% c(fizzbuzz). fizzbuzz:test().
+%
+% typer fizzbuzz.erl
+% dialyzer --no_check_plt --src fizzbuzz.erl
